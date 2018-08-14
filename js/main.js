@@ -48,7 +48,7 @@ chatForm.addEventListener('submit', function(){
 		case daveArray.includes("who is in our class?"):
 			//cycle through class names for 1.5 seconds each
 			break;
-		case daveArray.includes("name one person in our class"):
+		case daveArray.includes("gimmie one person in our class"):
 			//cycle through class names for 1.5 seconds each
 			break;
 		case daveArray.includes("quote me"):
