@@ -13,11 +13,12 @@ var chatForm = document.getElementById('chatForm'),
 	halChat = document.getElementById('hal');
 	
 let	daveArray = [""],
-	halArray = ["Good Morning Dave!"],
+	halArray = ["Good Morning Dave!", "How can I help you?"],
 	daveChatList = document.getElementById('daveChatList'),
 	halChatList = document.getElementById('halChatList'),
 	classNamesArray = ["Alex", "Chris", "Utah", "Hannah", "Kiya", "Matt", "Meghan", "Trevor", "Vishal"],
 	daveCommandHistory = [];
+
 
 var halMessage = function (halResponse) {
 	halChat.innerHTML = halResponse;
@@ -41,14 +42,16 @@ chatForm.addEventListener('submit', function(){
 
 
 	switch (true) {
-		case daveArray.includes("hello"):
-			halArray.push("How can I help you?");
+		case daveArray.includes("hi hal"):
 			halMessage(halArray[1])
 			break;
-		case daveArray.includes("class names"):
+		case daveArray.includes("who is in our class?"):
 			//cycle through class names for 1.5 seconds each
 			break;
-		case daveArray.includes("commands"):
+		case daveArray.includes("name one person in our class"):
+			//cycle through class names for 1.5 seconds each
+			break;
+		case daveArray.includes("quote me"):
 			daveArray.forEach(function(command) {
 				halArray.push(command)
 				halMessage(daveCommandHistory)
