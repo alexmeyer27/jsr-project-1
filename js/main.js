@@ -7,50 +7,72 @@ var chatForm = document.getElementById('chatForm'),
 	
 let	daveArray = [""],
 	halArray = ["Good Morning Dave!"];
+	daveChatList = document.getElementById('daveChatList');
+	halChatList = document.getElementById('halChatList');
 
-var buildDaveArray = function(chat) {
-	chat = chatInput.value
-	daveArray.push(chat);
-	// daveArray.shift();
-	daveChat.innerHTML = daveArray.value;
+var halMessage = function (halResponse) {
+	halChat.innerHTML = halResponse;
+	};
+
+halMessage(halArray[0]);
+
+var buildDaveArray = function() {
+	daveArray.push(chatInput.value.toLowerCase());
+	daveArray.shift();
+	daveChat.innerHTML = daveArray[0];
 };	
-
-
 console.log(daveArray);
+
 
 chatForm.addEventListener('submit', function(){
 	event.preventDefault();
-	buildDaveArray(chatInput.value);
+	
+	buildDaveArray();
+
+
+	switch (daveArray[0]) {
+		case "hello":
+			halArray.push("How can I help you?");
+			halMessage(halArray[1])
+			break;
+		default:
+			halMessage("I'm sorry, I don't understand");
+	}
 });
 
-// var displayDaveMessage = function(daveMessage) {
-// 	daveChat.innerHTML = daveMessage;
-// };
-	
-// chatForm.addEventListener('submit', function(){
-// 	event.preventDefault();
-// 	displayDaveMessage(chatInput.value);
-// });
+// daveArray.forEach(function(submissions){
+//  	var daveChatList = document.createElement("p");
+//  	var addToList = document.createTextNode(daveArray[submissions])
+//  	daveChatList.appendChild(addToList);
+//  	daveChat.appendChild(daveChatList);
+// 	});
+
+
 
 // create a function for HAL to respond to Dave's messages with variable logic based upon
 // Dave's inputs
 
+
+
+
+// var value = daveArray[0];
+
+// switch(value) {
+//     case "hello":
+//         halChat.innerHTML = "How can I help you?";
+//         break;
+//     // case n:
+//     //     code block
+//     //     break;
+//     default:
+//         halChat.innerHTML = halArray[0];
+// }
+
 // create a function for HAL to open the chat with "Good morning, Dave"
 
-var openingMessage = function () {
-	halChat.innerHTML = halArray;
-	};
 
 // invoke the opening message
 
-openingMessage();
-
-// chatInput.addEventListener('submit', function(){
-// 	event.preventDefault();
-// 	displayDaveMessage(chatInput.value);
-// });
 
 
-// if (myInput.value !== undefined) {
-// 	displayDaveMessage();
-// };
+
