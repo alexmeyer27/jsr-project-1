@@ -1,3 +1,10 @@
+//TODO: learn how to append to chat pane
+//		learn how to parse through daveCommandHistory to append to hal chat pane
+//		cycle through class names on 1.5 second timer
+//		clean up + refactor
+//		add if then for conditional?
+//		add a random component for class names (give me a random class name)
+
 // add an event listener to the form to submit Dave's message
 
 var chatForm = document.getElementById('chatForm'),
@@ -6,9 +13,11 @@ var chatForm = document.getElementById('chatForm'),
 	halChat = document.getElementById('hal');
 	
 let	daveArray = [""],
-	halArray = ["Good Morning Dave!"];
-	daveChatList = document.getElementById('daveChatList');
-	halChatList = document.getElementById('halChatList');
+	halArray = ["Good Morning Dave!"],
+	daveChatList = document.getElementById('daveChatList'),
+	halChatList = document.getElementById('halChatList'),
+	classNamesArray = ["Alex", "Chris", "Utah", "Hannah", "Kiya", "Matt", "Meghan", "Trevor", "Vishal"],
+	daveCommandHistory = [];
 
 var halMessage = function (halResponse) {
 	halChat.innerHTML = halResponse;
@@ -19,6 +28,7 @@ halMessage(halArray[0]);
 var buildDaveArray = function() {
 	daveArray.push(chatInput.value.toLowerCase());
 	daveArray.shift();
+	daveCommandHistory.push(chatInput.value.toLowerCase());
 	daveChat.innerHTML = daveArray[0];
 };	
 console.log(daveArray);
@@ -30,16 +40,26 @@ chatForm.addEventListener('submit', function(){
 	buildDaveArray();
 
 
-	switch (daveArray[0]) {
-		case "hello":
+	switch (true) {
+		case daveArray.includes("hello"):
 			halArray.push("How can I help you?");
 			halMessage(halArray[1])
+			break;
+		case daveArray.includes("class names"):
+			//cycle through class names for 1.5 seconds each
+			break;
+		case daveArray.includes("commands"):
+			daveArray.forEach(function(command) {
+				halArray.push(command)
+				halMessage(daveCommandHistory)
+			})
 			break;
 		default:
 			halMessage("I'm sorry, I don't understand");
 	}
 });
 
+//appending p's to chat pane to make pretty
 // daveArray.forEach(function(submissions){
 //  	var daveChatList = document.createElement("p");
 //  	var addToList = document.createTextNode(daveArray[submissions])
@@ -52,21 +72,6 @@ chatForm.addEventListener('submit', function(){
 // create a function for HAL to respond to Dave's messages with variable logic based upon
 // Dave's inputs
 
-
-
-
-// var value = daveArray[0];
-
-// switch(value) {
-//     case "hello":
-//         halChat.innerHTML = "How can I help you?";
-//         break;
-//     // case n:
-//     //     code block
-//     //     break;
-//     default:
-//         halChat.innerHTML = halArray[0];
-// }
 
 // create a function for HAL to open the chat with "Good morning, Dave"
 
