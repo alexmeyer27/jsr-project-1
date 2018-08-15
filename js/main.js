@@ -1,9 +1,6 @@
 //TODO: learn how to append to chat pane
 //		learn how to parse through daveCommandHistory to append to hal chat pane
-//		cycle through class names on 1.5 second timer
 //		clean up + refactor
-//		add if then for conditional?
-//		add a random component for class names (give me a random class name)
 
 // add an event listener to the form to submit Dave's message
 
@@ -13,12 +10,16 @@ var chatForm = document.getElementById('chatForm'),
 	halChat = document.getElementById('hal');
 	
 let	daveArray = [""],
-	halArray = ["Good Morning Dave!", "How can I help you?", "What should I change your name too?", "I'm sorry, I don't understand"],
-	daveChatList = document.getElementById('daveChatList'),
-	halChatList = document.getElementById('halChatList'),
+	halArray = ["Good Morning Dave!", 
+	"How can I help you?", 
+	"What should I change your name too?", 
+	"I'm sorry, I don't understand", 
+	"My apologies Alex, I'll change that for next time",
+	"Aparently you spent too much time coding gimics", 
+	"An AI is only as good as it's code, Dave. At least for now..."],
 	classNamesArray = ["Alex", "Chris", "Utah", "Hannah", "Kiya", "Matt", "Meghan", "Trevor", "Vishal"],
-	daveCommandHistory = [];
-	humanName = "Dave: "
+	daveCommandHistory = [],
+	humanName = "Dave";
 
 // create a function for HAL to open the chat with "Good morning, Dave"
 
@@ -34,10 +35,8 @@ var buildDaveArray = function() {
 	daveArray.push(chatInput.value.toLowerCase());
 	daveArray.shift();
 	daveCommandHistory.push(chatInput.value.toLowerCase());
-	daveChat.innerHTML = humanName + daveArray[0];
+	daveChat.innerHTML = humanName + ": " + daveArray[0];
 };	
-console.log(daveArray);
-
 
 chatForm.addEventListener('submit', function(){
 	event.preventDefault();
@@ -51,14 +50,17 @@ chatForm.addEventListener('submit', function(){
 		case daveArray.includes("hi hal"):
 			halMessage(halArray[1])
 			break;
+		case daveArray.includes("what's my name again?"):
+			halMessage("Why it's " + humanName + " of course!");
+			break;
 		case daveArray.includes("change my name"):
-				halMessage(halArray[2])
+			halMessage(halArray[2])
 			break;
 		case daveArray.includes("my name is alex"):
-				halMessage("My apologies Alex, I'll change that for next time");
-				humanName = "Alex: ";
+			halMessage(halArray[4]);
+			humanName = "Alex";
 			break;
-		case daveArray.includes("gimmie one person in our class"):
+		case daveArray.includes("gimmie a person"):
 			function getPerson() {
    				return classNamesArray[Math.floor(Math.random() * classNamesArray.length)];
 			}
@@ -70,20 +72,17 @@ chatForm.addEventListener('submit', function(){
 				halMessage(daveCommandHistory)
 			})
 			break;
+		case daveArray.includes("why don't our messages appear in the chat pane as p elements?"):
+			if (humanName !== "Dave") {
+				halMessage(halArray[5])
+			} else {
+				halMessage(halArray[6])
+			}
+			break;
 		default:
 			halMessage(halArray[3]);
 	}
 });
-
-
-//appending p's to chat pane to make pretty
-// daveArray.forEach(function(submissions){
-//  	var daveChatList = document.createElement("p");
-//  	var addToList = document.createTextNode(daveArray[submissions])
-//  	daveChatList.appendChild(addToList);
-//  	daveChat.appendChild(daveChatList);
-// 	});
-
 
 
 
